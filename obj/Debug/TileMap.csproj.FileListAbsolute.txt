@@ -1,0 +1,9 @@
+G:\Projects\TileMap\TileMap\bin\Debug\TileMap.exe.config
+G:\Projects\TileMap\TileMap\bin\Debug\TileMap.exe
+G:\Projects\TileMap\TileMap\bin\Debug\TileMap.pdb
+G:\Projects\TileMap\TileMap\obj\Debug\TileMap.csprojResolveAssemblyReference.cache
+G:\Projects\TileMap\TileMap\obj\Debug\TileMap.Form1.resources
+G:\Projects\TileMap\TileMap\obj\Debug\TileMap.Properties.Resources.resources
+G:\Projects\TileMap\TileMap\obj\Debug\TileMap.csproj.GenerateResource.Cache
+G:\Projects\TileMap\TileMap\obj\Debug\TileMap.exe
+G:\Projects\TileMap\TileMap\obj\Debug\TileMap.pdb
