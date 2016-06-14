@@ -115,6 +115,7 @@ namespace TileMap
         static int spacingX, spacingY;
         private void button2_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Filter = "Text Files (*.txt)|*.txt";
             openFileDialog1.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath);
             openFileDialog1.ShowDialog();
 
