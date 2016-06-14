@@ -26,6 +26,53 @@ namespace TileMap
         public Form1()
         {
             InitializeComponent();
+
+            MouseClick += Form1_MouseClick;
+            KeyPress += Form1_KeyPress;
+            Resize += Form1_Resize;
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            DrawTileMap();
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.W || e.KeyChar == (char)Keys.Up) { numericUpDown5.Value += 1; RefreshColor(); }
+            if (e.KeyChar == (char)Keys.S || e.KeyChar == (char)Keys.Down) { numericUpDown5.Value -= 1; RefreshColor(); }
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.X < gridWidth + 10 && e.X > 10 && e.Y < gridHeight + 50 && e.Y > 50)
+            {
+                if (tileMap[(e.X - 10) / (gridWidth / tileMap.GetLength(0)), (e.Y - 50) / (gridHeight / tileMap.GetLength(1))] == 0)
+                {
+                    if (numericUpDown5.Value == 6 || numericUpDown5.Value == 7 || numericUpDown5.Value == 10)
+                    {
+                        GenerateTile(((e.X - 10) / (gridWidth / tileMap.GetLength(0))) * 10, (((e.Y - 50) / (gridHeight / tileMap.GetLength(1))) * 10) + 5, 10, 5, pictureBox1.BackColor);
+                    }
+                    else
+                    {
+                        if (numericUpDown5.Value == 8 || numericUpDown5.Value == 11)
+                        {
+                            GenerateTile(((e.X - 10) / (gridWidth / tileMap.GetLength(0))) * 10, ((e.Y - 50) / (gridHeight / tileMap.GetLength(1))) * 10, 10, 5, pictureBox1.BackColor);
+                        }
+                        else
+                        {
+                            GenerateTile(((e.X - 10) / (gridWidth / tileMap.GetLength(0))) * 10, ((e.Y - 50) / (gridHeight / tileMap.GetLength(1))) * 10, 10, 10, pictureBox1.BackColor);
+                        }
+                    }
+
+                    tileMap[(e.X - 10) / (gridWidth / tileMap.GetLength(0)), (e.Y - 50) / (gridHeight / tileMap.GetLength(1))] = (int)numericUpDown5.Value;
+                }
+                else
+                {
+                    GenerateTile(((e.X - 10) / (gridWidth / tileMap.GetLength(0))) * 10, ((e.Y - 50) / (gridHeight / tileMap.GetLength(1))) * 10, 10, 10, Color.Gray);
+                    tileMap[(e.X - 10) / (gridWidth / tileMap.GetLength(0)), (e.Y - 50) / (gridHeight / tileMap.GetLength(1))] = 0;
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -33,9 +80,12 @@ namespace TileMap
             GenerateGrid((int)numericUpDown1.Value, (int)numericUpDown2.Value, (int)numericUpDown3.Value, (int)numericUpDown4.Value);
         }
 
+        static int gridWidth, gridHeight;
         void GenerateGrid(int width, int height, int divisionsX, int divisionsY)
         {
-            tileMap = new int[divisionsX, divisionsY];
+            if (tileMap == null) { tileMap = new int[divisionsX, divisionsY]; }
+            gridWidth = width;
+            gridHeight = height;
 
             CreateGraphics().Clear(Color.Gray);
             CreateGraphics().DrawLine(new Pen(Color.Black), 10, 50, width + 10, 50);
@@ -59,9 +109,10 @@ namespace TileMap
             CreateGraphics().FillRectangle(new SolidBrush(color), x + 11, y + 51, width - 1, height - 1);
         }
 
-        static int[,] tileMap;
+        int[,] tileMap;
         List<string> stringList = new List<string>();
 
+        static int spacingX, spacingY;
         private void button2_Click(object sender, EventArgs e)
         {
             openFileDialog1.ShowDialog();
@@ -88,6 +139,9 @@ namespace TileMap
                 if (stringList[0][x] == ',') increment += 1;
             }
 
+            spacingX = increment;
+            spacingY = stringList.Count;
+
             GenerateGrid(800, 600, increment, stringList.Count);
             increment = 0;
 
@@ -113,6 +167,15 @@ namespace TileMap
                     }
                 }
             }
+            DrawTileMap();
+        }
+
+        bool drawGrid = true;
+        void DrawTileMap()
+        {
+            CreateGraphics().Clear(Color.Gray);
+
+            if (drawGrid) GenerateGrid(gridWidth, gridHeight, spacingX, spacingY);
 
             for (int y = 0; y < tileMap.GetLength(1); y++)
             {
@@ -158,6 +221,33 @@ namespace TileMap
                     sw.WriteLine();
                 }
             }
+        }
+
+        void RefreshColor()
+        {
+            if (numericUpDown5.Value == 0) pictureBox1.BackColor = Color.White;
+            if (numericUpDown5.Value == 1) pictureBox1.BackColor = Color.Blue;
+            if (numericUpDown5.Value == 2) pictureBox1.BackColor = Color.Pink;
+            if (numericUpDown5.Value == 3) pictureBox1.BackColor = Color.Pink;
+            if (numericUpDown5.Value == 4) pictureBox1.BackColor = Color.Black;
+            if (numericUpDown5.Value == 5) pictureBox1.BackColor = Color.Red;
+            if (numericUpDown5.Value == 6) pictureBox1.BackColor = Color.HotPink;
+            if (numericUpDown5.Value == 7) pictureBox1.BackColor = Color.HotPink;
+            if (numericUpDown5.Value == 8) pictureBox1.BackColor = Color.HotPink;
+            if (numericUpDown5.Value == 9) pictureBox1.BackColor = Color.Yellow;
+            if (numericUpDown5.Value == 10) pictureBox1.BackColor = Color.Yellow;
+            if (numericUpDown5.Value == 11) pictureBox1.BackColor = Color.Yellow;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            drawGrid = !drawGrid;
+            DrawTileMap();
+        }
+
+        private void numericUpDown5_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshColor();
         }
 
         private void button4_Click(object sender, EventArgs e)
