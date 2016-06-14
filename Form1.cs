@@ -154,7 +154,7 @@ namespace TileMap
                 increment = 0;
                 for (int x = 0; x < stringList[y].Length; x++)
                 {
-                    if (stringList[y][x] == ',')
+                    if (stringList[y][x] == ',' || (x == stringList[y].Length - 1 && stringList[y][x] == '}'))
                     {
                         tileMap[increment, y] = int.Parse(intString);
                         intString = "";
