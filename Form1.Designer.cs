@@ -173,11 +173,6 @@
             // numericUpDown5
             // 
             this.numericUpDown5.Location = new System.Drawing.Point(492, 12);
-            this.numericUpDown5.Maximum = new decimal(new int[] {
-            11,
-            0,
-            0,
-            0});
             this.numericUpDown5.Minimum = new decimal(new int[] {
             1,
             0,

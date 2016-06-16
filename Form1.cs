@@ -18,7 +18,11 @@ namespace TileMap
         ReverseSetTrampolineTile = 8,
         MovingTile = 9,
         HalfMovingTile = 10,
-        ReverseHalfMovingTile = 11
+        ReverseHalfMovingTile = 11,
+        UpAirTile = 12,
+        DownAirTile = 13,
+        LeftAirTile = 14,
+        RightAirTile = 15
     };
 
     public partial class Form1 : Form
@@ -194,6 +198,10 @@ namespace TileMap
                     if (tileMap[x, y] == 9) GenerateTile(x * 10, y * 10, 10, 10, Color.Yellow);
                     if (tileMap[x, y] == 10) GenerateTile(x * 10, (y * 10) + 5, 10, 5, Color.Yellow);
                     if (tileMap[x, y] == 11) GenerateTile(x * 10, y * 10, 10, 5, Color.Yellow);
+                    if (tileMap[x, y] == 12) GenerateTile(x * 10, y * 10, 10, 10, Color.WhiteSmoke);
+                    if (tileMap[x, y] == 13) GenerateTile(x * 10, y * 10, 10, 10, Color.WhiteSmoke);
+                    if (tileMap[x, y] == 14) GenerateTile(x * 10, y * 10, 10, 10, Color.WhiteSmoke);
+                    if (tileMap[x, y] == 15) GenerateTile(x * 10, y * 10, 10, 10, Color.WhiteSmoke);
                 }
             }
         }
@@ -239,6 +247,10 @@ namespace TileMap
             if (numericUpDown5.Value == 9) pictureBox1.BackColor = Color.Yellow;
             if (numericUpDown5.Value == 10) pictureBox1.BackColor = Color.Yellow;
             if (numericUpDown5.Value == 11) pictureBox1.BackColor = Color.Yellow;
+            if (numericUpDown5.Value == 12) pictureBox1.BackColor = Color.WhiteSmoke;
+            if (numericUpDown5.Value == 13) pictureBox1.BackColor = Color.WhiteSmoke;
+            if (numericUpDown5.Value == 14) pictureBox1.BackColor = Color.WhiteSmoke;
+            if (numericUpDown5.Value == 15) pictureBox1.BackColor = Color.WhiteSmoke;
         }
 
         private void button5_Click(object sender, EventArgs e)
